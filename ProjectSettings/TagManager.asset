@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI Buttons
+    uniqueID: 772539561
+    locked: 0
+  - name: UI Text
+    uniqueID: 2727627725
+    locked: 0
