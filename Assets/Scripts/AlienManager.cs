@@ -28,14 +28,17 @@ public class AlienManager : MonoBehaviour
 
     int _correctCounter,_incorrectCounter = 0;
 
+    [SerializeField] AnimationClip _fartAnim;
+    Animator anim;
+
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         using (StreamReader r = new StreamReader("Assets/dad-jokes.json"))
         {
             string json = r.ReadToEnd();
             jokeList = JsonConvert.DeserializeObject<List<Joke>>(json);
         }
-    
         GenerateJoke();
     }
 
@@ -81,8 +84,9 @@ public class AlienManager : MonoBehaviour
     void WrongAnswer()
     {
         Debug.Log("Incorrect!");
+        anim.SetTrigger("fart");
         _incorrectCounter++;
-        if (_correctCounter == 5) Lose();
+        if (_incorrectCounter == 5) Lose();
         GenerateJoke();
     }
 
@@ -93,6 +97,7 @@ public class AlienManager : MonoBehaviour
 
     void Lose()
     {
+       
         Debug.Log("Lose");
     }
 }
