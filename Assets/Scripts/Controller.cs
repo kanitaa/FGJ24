@@ -28,7 +28,8 @@ public class Controller : MonoBehaviour
     {
         if (this.state == 0) {
             this.activeOverlay = Instantiate(example1, overlay.transform.position, Quaternion.identity, overlay.transform);
-            this.activeOverlay.transform.SetParent(overlay.transform, false);
+            this.activeOverlay.transform.SetParent(overlay.transform);
+            this.activeOverlay.transform.localScale += new Vector3(1960, 1080, 1);
             // Push example 1 to canvas
             this.state = 1;
         }
@@ -36,6 +37,8 @@ public class Controller : MonoBehaviour
             Instantiate(example1, overlay.transform.position, Quaternion.identity, overlay.transform);
             Destroy(this.activeOverlay);
             this.activeOverlay = Instantiate(example2, overlay.transform.position, Quaternion.identity, overlay.transform);
+            this.activeOverlay.transform.SetParent(overlay.transform);
+            this.activeOverlay.transform.localScale += new Vector3(1, 1, 1);
             // Push example 2 to canvas
             this.state = 2;
         }
