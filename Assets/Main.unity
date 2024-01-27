@@ -802,6 +802,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 457115813599371743, guid: c22e7e754e1c4cb4c8b93d1f727e22b3, type: 3}
+      propertyPath: _ctrl
+      value: 
+      objectReference: {fileID: 83490909}
+    - target: {fileID: 457115813599371743, guid: c22e7e754e1c4cb4c8b93d1f727e22b3, type: 3}
       propertyPath: _drawingsHolder
       value: 
       objectReference: {fileID: 761379655}

@@ -54,5 +54,12 @@ public class Controller : MonoBehaviour
             // Push example 2 to canvas
             this.state = 3;
         }
+        else if (this.state == 3)
+        {
+            //Surgery room
+            Destroy(this.activeOverlay);
+            
+            this.state = 4;
+        }
     }
 }

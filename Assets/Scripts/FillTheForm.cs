@@ -10,6 +10,8 @@ using UnityEngine.Events;
 
 public class FillTheForm : MonoBehaviour
 {
+    [SerializeField] Controller _ctrl;
+
     [SerializeField] Button _patientName, _restartName, _submitName;
     [SerializeField] TextMeshProUGUI _patientNameText;
     [SerializeField] GameObject _nameGame;
@@ -313,6 +315,7 @@ public class FillTheForm : MonoBehaviour
 
     void GoToSurgery()
     {
-        Debug.Log("Go surgery");
+        _ctrl.Next();
+        transform.parent.gameObject.SetActive(false);
     }
 }
