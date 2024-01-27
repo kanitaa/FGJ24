@@ -140,7 +140,7 @@ public class FillTheForm : MonoBehaviour
         _enableNumbers.gameObject.SetActive(false);
         _restartNumbers.gameObject.SetActive(true);
         _setNumber.gameObject.SetActive(true);
-
+        
         StartCoroutine(ChangeNumber());
     }
 
@@ -150,6 +150,7 @@ public class FillTheForm : MonoBehaviour
             _tempNumber++;
         else _tempNumber = 0;
 
+        _numbers[_currentNumber].GetComponentInParent<Image>().color = Color.green;
         _numbers[_currentNumber].text = _tempNumber.ToString();
         yield return new WaitForSeconds(0.15f);
 
@@ -161,6 +162,7 @@ public class FillTheForm : MonoBehaviour
         foreach(TextMeshProUGUI number in _numbers)
         {
             number.text = "";
+            number.GetComponentInParent<Image>().color = Color.gray;
         }
         _currentNumber = 0;
         _tempNumber = -1;

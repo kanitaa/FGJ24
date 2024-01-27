@@ -47,3 +47,6 @@ TagManager:
   - name: UI Text
     uniqueID: 2727627725
     locked: 0
+  - name: New Layer 3
+    uniqueID: 4257490387
+    locked: 0
