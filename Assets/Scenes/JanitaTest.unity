@@ -475,6 +475,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3581055390149015428, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769772523115343963, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428611075583404080, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -361
+      objectReference: {fileID: 0}
     - target: {fileID: 9211875375884702967, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_Name
       value: Alien
