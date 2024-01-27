@@ -12,6 +12,7 @@ public class Controller : MonoBehaviour
     public GameObject overlay;
     public GameObject alienPopup;
     public GameObject kidney;
+    public GameObject robot;
     public GameObject form;
     private int state = 0;
     private GameObject activeOverlay;
@@ -83,6 +84,25 @@ public class Controller : MonoBehaviour
             activeOverlay.transform.localScale += new Vector3(1, 1, 1);
         }
         if (state == 11)
+        {
+            Destroy(activeOverlay);
+            activeOverlay = Instantiate(robot, overlay.transform.position, Quaternion.identity, overlay.transform);
+            activeOverlay.transform.SetParent(overlay.transform);
+            activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+        }
+        if (state == 12)
+        {
+            TriggerAlien();
+        }
+        if (state == 14)
+        {
+            TriggerAlien();
+        }
+        if (state == 16)
+        {
+            TriggerAlien();
+        }
+        if (state == 17)
         {
             Destroy(activeOverlay);
         }
