@@ -13,6 +13,7 @@ public class FillTheForm : MonoBehaviour
     [SerializeField] Button _patientName, _restartName, _submitName;
     [SerializeField] TextMeshProUGUI _patientNameText;
     [SerializeField] GameObject _nameGame;
+    string _scrambledName = "";
 
     // Number variables
     [SerializeField] List<TextMeshProUGUI> _numbers;
@@ -20,22 +21,38 @@ public class FillTheForm : MonoBehaviour
     int _tempNumber = -1;
     [SerializeField] Button _enableNumbers, _restartNumbers, _setNumber;
 
-    // Symptoms
-    [SerializeField] List<Toggle> _symptoms;
-    bool _isToggling = false;
+    // Symptom
+    [SerializeField] TMP_InputField _symptom;
+   
+
+    // Draw
+    Camera _mainCam;
+    [SerializeField] GameObject _pen;
+    LineRenderer _currentLR;
+    Vector2 _lastPos;
+    [SerializeField] GameObject _drawingsHolder;
+
+    bool _canDraw;
+    public bool canDraw
+    {
+        get => _canDraw;
+        set => _canDraw = value;
+    }
 
 
+    // Submit
+    [SerializeField] Button _submitForm, _goToSurgery;
+    [SerializeField] GameObject _submitPanel;
+    [TextArea(5,5)]
+    string _submitString,  _urgentString;
+    int _stringIndex;
+    [SerializeField] TextMeshProUGUI _urgentText, _submitText, _diagnosisText;
+   
 
-    // Diagnosis
-    [SerializeField] TextMeshProUGUI _diagnosisText;
-    [SerializeField] string _diagnosis;
-    int _diagnosisIndex=0;
+    [SerializeField] TextMeshProUGUI _errorMessage;
 
 
-
-
-
-    bool _isNameDone, _isNumberDone, _isSymptomDone=false;
+    bool _isNameDone, _isNumberDone, _isSymptomDone, _isDrawingDone=false;
     private void Start()
     {
         _patientName.onClick.AddListener(EnableNameGame);
@@ -48,14 +65,24 @@ public class FillTheForm : MonoBehaviour
 
         _restartNumbers.gameObject.SetActive(false);
         _setNumber.gameObject.SetActive(false);
-    }
 
+        _mainCam = Camera.main;
+
+        _symptom.onEndEdit.AddListener(Symptom);
+
+        _submitForm.onClick.AddListener(SubmitForm);
+        _goToSurgery.onClick.AddListener(GoToSurgery);
+        _goToSurgery.gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if(_canDraw) Draw();
+    }
     #region Name
 
     void EnableNameGame()
     {
         _nameGame.SetActive(true);
-        _patientName.gameObject.SetActive(false);
     }
 
     public void AddLetter(string letter)
@@ -78,15 +105,29 @@ public class FillTheForm : MonoBehaviour
         List<char> characters = new List<char>(input.ToCharArray());
         while (characters.Count > 0)
         {
-            int indexChar = Random.Range(0, characters.Count - 1);
+            int indexChar = Random.Range(0, characters.Count);
             result += characters[indexChar];
             characters.RemoveAt(indexChar);
 
         }
+        while (result == input)
+        {
+            result = "";
+            characters = new List<char>(input.ToCharArray());
+            while (characters.Count > 0)
+            {
+                int indexChar = Random.Range(0, characters.Count);
+                result += characters[indexChar];
+                characters.RemoveAt(indexChar);
 
-        _patientNameText.text = result;
-        _isNameDone = true;
-        if (_isNameDone && _isNumberDone && _isSymptomDone) StartCoroutine(ShowDiagnosis());
+            }
+        }
+            _patientNameText.text = result;
+            _scrambledName = result;
+            _isNameDone = true;
+
+        
+      
     }
     #endregion
 
@@ -108,7 +149,7 @@ public class FillTheForm : MonoBehaviour
         else _tempNumber = 0;
 
         _numbers[_currentNumber].text = _tempNumber.ToString();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
 
         StartCoroutine(ChangeNumber());
     }
@@ -135,8 +176,6 @@ public class FillTheForm : MonoBehaviour
             _setNumber.gameObject.SetActive(false);
             _restartNumbers.gameObject.SetActive(false);
             _isNumberDone = true;
-
-            if(_isNameDone&&_isNumberDone&&_isSymptomDone) StartCoroutine(ShowDiagnosis());
         }
 
         _tempNumber = -1;
@@ -144,52 +183,136 @@ public class FillTheForm : MonoBehaviour
 
     #endregion
 
-    public void ToggleSymptom()
+    #region Symptoms
+    void Symptom(string input)
     {
-        if (!_isToggling)
-        {
-            int random = Random.Range(0, _symptoms.Count - 1);
-            _symptoms[random].isOn = true;
-            _symptoms[random].StartCoroutine(KeepToggling());
-        }
-
-        _isToggling = true;
-
-      
+        if(input.Length>0) _isSymptomDone = true;
     }
-    IEnumerator KeepToggling()
+
+    #endregion
+
+    #region Drawing
+
+    void Draw()
     {
-        bool allToggled = true;
-        foreach (Toggle toggle in _symptoms)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (!toggle.isOn)
+            CreateBrush();
+        }
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+            if(mousePos != _lastPos)
             {
-                toggle.isOn = true;
-                allToggled = false;
-                break ;
+                AddAPoint(mousePos);
+                _lastPos = mousePos;
             }
+            
         }
-        if (allToggled)
+        else
         {
-            Debug.Log("All toggled");
-            StopCoroutine(KeepToggling());
+            _currentLR = null;
         }
-        yield return new WaitForSeconds(1);
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !_isDrawingDone)
+        {
+            _isDrawingDone = true;
+            Debug.Log("Drawing ended");
+        }
     }
 
-    IEnumerator ShowDiagnosis()
+    void CreateBrush()
     {
-        _diagnosisText.text += _diagnosis.ElementAt(_diagnosisIndex);
-        if (_diagnosisIndex < _diagnosis.Length - 1)
-            _diagnosisIndex++;
+        GameObject brushInstance = Instantiate(_pen, _drawingsHolder.transform);
+        _currentLR = brushInstance.GetComponent<LineRenderer>();
+
+        Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        _currentLR.SetPosition(0, mousePos);
+        _currentLR.SetPosition(1, mousePos);
+    }
+
+    void AddAPoint(Vector2 pointPos)
+    {
+        _currentLR.positionCount++;
+        int posIndex = _currentLR.positionCount-1;
+        _currentLR.SetPosition(posIndex, pointPos);
+    }
+    #endregion
+
+    void SubmitForm()
+    {
+        if (!_isNameDone)
+        {
+            _errorMessage.text = "You need to write down your name first.";
+           
+        }
+        else if(!_isNumberDone)
+        {
+            _errorMessage.text = "You need to add your phone number first.";
+        }
+        else if (!_isDrawingDone)
+        {
+            _errorMessage.text = "You need to draw your symptoms first.";
+        }
+        else if (!_isSymptomDone)
+        {
+            _errorMessage.text = "You need to describe your symptoms first.";
+        }
+       
+        else
+        {
+            Debug.Log("Submit form");
+            _drawingsHolder.SetActive(false);
+            _submitPanel.SetActive(true);
+            _urgentString = "URGENT!!!";
+            _submitString = "You need immediate surgery, " + _scrambledName+ ". But our surgeon is playing golf right now (and"+
+                " you can't afford it anyway). You need to perform self-surgery! – you know, like a surgeon!";
+            StartCoroutine(ShowTitle());
+        }
+        StartCoroutine(HideErrorMessage());
+    }
+    IEnumerator HideErrorMessage()
+    {
+        yield return new WaitForSeconds(1.4f);
+        _errorMessage.text = "";
+    }
+
+    IEnumerator ShowTitle()
+    {
+        _urgentText.text += _urgentString.ElementAt(_stringIndex);
+        if (_stringIndex < _urgentString.Length - 1)
+            _stringIndex++;
         else
         {
             Debug.Log("Last letter");
+            _stringIndex = 0;
             StopAllCoroutines();
-        }
-        yield return new WaitForSeconds(0.05f);
+            StartCoroutine(ShowDiagnosis());
 
+        }
+        yield return new WaitForSeconds(0.03f);
+        StartCoroutine(ShowTitle());
+    }
+    IEnumerator ShowDiagnosis()
+    {
+        _submitText.text += _submitString.ElementAt(_stringIndex);
+        if (_stringIndex < _submitString.Length - 1)
+            _stringIndex++;
+        else
+        {
+            Debug.Log("Last letter");
+            yield return new WaitForSeconds(0.5f);
+            StopAllCoroutines();
+            _diagnosisText.gameObject.SetActive(true);
+            _goToSurgery.gameObject.SetActive(true);
+            
+        }
+        yield return new WaitForSeconds(0.03f);
         StartCoroutine(ShowDiagnosis());
     }
 
+    void GoToSurgery()
+    {
+        Debug.Log("Go surgery");
+    }
 }
