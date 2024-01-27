@@ -268,7 +268,7 @@ public class FillTheForm : MonoBehaviour
             _submitPanel.SetActive(true);
             _urgentString = "URGENT!!!";
             _submitString = "You need immediate surgery, " + _scrambledName+ ". But our surgeon is playing golf right now (and"+
-                " you can't afford it anyway). You need to perform self-surgery! – you know, like a surgeon!";
+                " you can't afford it anyway). You need to perform self-surgery! You know, like a surgeon!";
             StartCoroutine(ShowTitle());
         }
         StartCoroutine(HideErrorMessage());
