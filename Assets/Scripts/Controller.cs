@@ -42,10 +42,17 @@ public class Controller : MonoBehaviour
             _scene.GetComponentInChildren<TextMeshProUGUI>().text = _sceneStrings[state-1];
             return;
         }
-          
-        _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        state++;
+        Debug.Log(state);
 
-        if (state == 4) //Form
+
+        if (state < 9)
+        {
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state-1];
+            StartCoroutine(FancyText(state-1));
+        }
+        if (state == 5) //Form
         {
             form.SetActive(true);
             _scene.SetActive(false);
@@ -53,12 +60,12 @@ public class Controller : MonoBehaviour
             _textRunning = false;
             _stringIndex = 0;
         }
-        if (state == 5) //Title screen
+        if (state == 6) //Title screen
         {
             _scene.SetActive(true);
             _nextButton.SetActive(true);
         }
-        if (state == 8) //Alien popup
+        if (state == 9) //Alien popup
         {
             _scene.transform.GetChild(0).gameObject.SetActive(false);
             alienPopup.SetActive(true);
@@ -66,9 +73,7 @@ public class Controller : MonoBehaviour
 
             return;
         }
-        _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state];
-        StartCoroutine(FancyText(state));
-        state++;
+        
         
 
         //if (this.state == 0) {

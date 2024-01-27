@@ -584,9 +584,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 962963459144014482, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_text
+      value: Come up with a good joke to go with the punch line or be the next one
+        to get punched!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3581055390149015428, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 4405807432773560125, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5333430992000837232, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_text
+      value: Alien just came up with a punchline it believes to be of superior quality!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769772523115343963, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 6877196223583211953, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -595,6 +612,10 @@ PrefabInstance:
     - target: {fileID: 8428611075583404080, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428611075583404080, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -360
       objectReference: {fileID: 0}
     - target: {fileID: 8429169208992076762, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_Pivot.x
@@ -648,6 +669,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 269.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8833936948789452881, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
+      propertyPath: _ctrl
+      value: 
+      objectReference: {fileID: 83490909}
     - target: {fileID: 9211875375884702967, guid: 5fcbe0a7a18daeb459f83d892d6b8772, type: 3}
       propertyPath: m_Name
       value: Alien
