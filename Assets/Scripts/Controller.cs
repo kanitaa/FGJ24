@@ -11,6 +11,7 @@ public class Controller : MonoBehaviour
     public GameObject background;
     public GameObject overlay;
     public GameObject alienPopup;
+    public GameObject kidney;
     public GameObject form;
     private int state = 0;
     private GameObject activeOverlay;
@@ -71,11 +72,19 @@ public class Controller : MonoBehaviour
         }
         if (state == 9) //Alien popup
         {
-            _scene.transform.GetChild(0).gameObject.SetActive(false);
-            alienPopup.SetActive(true);
-            _nextButton.SetActive(false);
+            TriggerAlien();
 
             return;
+        }
+        if (state == 10)
+        {
+            activeOverlay = Instantiate(kidney, overlay.transform.position, Quaternion.identity, overlay.transform);
+            activeOverlay.transform.SetParent(overlay.transform);
+            activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+        }
+        if (state == 11)
+        {
+            Destroy(activeOverlay);
         }
         
         
@@ -172,6 +181,23 @@ public class Controller : MonoBehaviour
         //}
 
     }
+
+    public void AlienDistraction()
+    {
+        _scene.transform.GetChild(0).gameObject.SetActive(false);
+        alienPopup.SetActive(true);
+        _nextButton.SetActive(false);
+        alienPopup.GetComponentInChildren<AlienManager>().isDistraction = true;
+    }
+
+    public void TriggerAlien()
+    {
+        _scene.transform.GetChild(0).gameObject.SetActive(false);
+        alienPopup.SetActive(true);
+        _nextButton.SetActive(false);
+        alienPopup.GetComponentInChildren<AlienManager>().isDistraction = false;
+    }
+
     IEnumerator FancyText(int index)
     {
         _textRunning = true;

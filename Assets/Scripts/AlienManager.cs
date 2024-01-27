@@ -18,6 +18,7 @@ public class AlienManager : MonoBehaviour
     [SerializeField] Controller _ctrl;
     [SerializeField] TextMeshProUGUI _alienText, _answerA, _answerB;
     [SerializeField] Button _aButton, _bButton;
+    public bool isDistraction = false;
 
     private List<Joke> jokeList;
 
@@ -89,7 +90,10 @@ public class AlienManager : MonoBehaviour
     {
         Debug.Log("Win");
         transform.parent.gameObject.SetActive(false);
-        _ctrl.Next();
+        if (isDistraction == false)
+        {
+            _ctrl.Next();
+        }
     }
 
     void Lose()
@@ -97,6 +101,9 @@ public class AlienManager : MonoBehaviour
        
         Debug.Log("Lose");
         transform.parent.gameObject.SetActive(false);
-        _ctrl.Next();
+        if (isDistraction == false)
+        {
+            _ctrl.Next();
+        }
     }
 }
