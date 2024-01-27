@@ -23,9 +23,10 @@ public class AlienManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _alienText, _answerA, _answerB;
     [SerializeField] Button _aButton, _bButton;
-    [SerializeField] List<DadJoke> _dadJokes;
 
     private List<Joke> jokeList;
+
+    int _correctCounter,_incorrectCounter = 0;
 
     private void Start()
     {
@@ -73,11 +74,25 @@ public class AlienManager : MonoBehaviour
     void CorrectAnswer()
     {
         Debug.Log("Correct!");
+        _correctCounter++;
+        if (_correctCounter == 7) Win();
         GenerateJoke();
     }
     void WrongAnswer()
     {
         Debug.Log("Incorrect!");
+        _incorrectCounter++;
+        if (_correctCounter == 5) Lose();
         GenerateJoke();
+    }
+
+    void Win()
+    {
+        Debug.Log("Win");
+    }
+
+    void Lose()
+    {
+        Debug.Log("Lose");
     }
 }
