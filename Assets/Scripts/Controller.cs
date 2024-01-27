@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
     public GameObject overlay;
     public GameObject example1;
     public GameObject example2;
+    public GameObject form;
     private int state = 0;
     private GameObject activeOverlay;
 
@@ -34,13 +35,20 @@ public class Controller : MonoBehaviour
             this.state = 1;
         }
         else if (this.state == 1) {
-            Instantiate(example1, overlay.transform.position, Quaternion.identity, overlay.transform);
             Destroy(this.activeOverlay);
             this.activeOverlay = Instantiate(example2, overlay.transform.position, Quaternion.identity, overlay.transform);
             this.activeOverlay.transform.SetParent(overlay.transform);
             this.activeOverlay.transform.localScale += new Vector3(1, 1, 1);
             // Push example 2 to canvas
             this.state = 2;
+        }
+        else if (this.state == 2) {
+            Destroy(this.activeOverlay);
+            this.activeOverlay = Instantiate(form, overlay.transform.position, Quaternion.identity, overlay.transform);
+            this.activeOverlay.transform.SetParent(overlay.transform);
+            this.activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+            // Push example 2 to canvas
+            this.state = 3;
         }
     }
 }
