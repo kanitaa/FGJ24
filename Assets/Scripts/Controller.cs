@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -44,9 +45,12 @@ public class Controller : MonoBehaviour
         }
         else if (this.state == 2) {
             Destroy(this.activeOverlay);
-            this.activeOverlay = Instantiate(form, overlay.transform.position, Quaternion.identity, overlay.transform);
-            this.activeOverlay.transform.SetParent(overlay.transform);
-            this.activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+            form.SetActive(true);
+            GameObject nextButton = overlay.transform.GetChild(0).gameObject;
+            nextButton.SetActive(false);
+            //this.activeOverlay = Instantiate(form, overlay.transform.position, Quaternion.identity, overlay.transform);
+            //this.activeOverlay.transform.SetParent(overlay.transform);
+            //this.activeOverlay.transform.localScale += new Vector3(1, 1, 1);
             // Push example 2 to canvas
             this.state = 3;
         }
