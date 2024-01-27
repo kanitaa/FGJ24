@@ -58,7 +58,7 @@ public class Controller : MonoBehaviour
             _scene.SetActive(true);
             _nextButton.SetActive(true);
         }
-        if (state == 7) //Alien popup
+        if (state == 8) //Alien popup
         {
             _scene.transform.GetChild(0).gameObject.SetActive(false);
             alienPopup.SetActive(true);

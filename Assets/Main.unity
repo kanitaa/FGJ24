@@ -185,9 +185,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e68f82cd64eb0574194b090511a1b068, type: 3}
   - {fileID: 21300000, guid: d2de7c367fb84b340a587ac19d7de1f5, type: 3}
   - {fileID: 21300000, guid: 8c6f70ec2d01b6d4fa6cb5b099f2ef26, type: 3}
+  - {fileID: 21300000, guid: 8c6f70ec2d01b6d4fa6cb5b099f2ef26, type: 3}
   - {fileID: 21300000, guid: 95b70fc8dbbce744183ba363e06c66f0, type: 3}
   - {fileID: 21300000, guid: d9637930695d3cb4a963f2eda813aee1, type: 3}
   - {fileID: 21300000, guid: 06da4c338b79cad4f860963e9f001ada, type: 3}
+  - {fileID: 21300000, guid: d9637930695d3cb4a963f2eda813aee1, type: 3}
   _sceneStrings:
   - "Horrible dreams haunt you at nights. Sweaty visions of someone hugging your
     face, and distorted images of vivisection filled your mind withunspeakable horror.
@@ -208,8 +210,9 @@ MonoBehaviour:
     \nRobot: \u201CPlease DON\u2019T PANIC! Here. Fill out this from.\u201D \nGives
     you a form to fill. It\u2019s standard, so it should be quite a simpletask."
   - ---Title Scene---
-  - "Finally you\u2019re on the surgery table. Now you can relax. Let\u2019s see
-    what\u2019s going on with your stomach\u2026"
+  - "Robot shows you to the operation room. Finally you\u2019ll be cured."
+  - "You lay the surgery table. Now you can relax. Let\u2019s see what\u2019s going
+    on with your stomach\u2026"
   - "Huh? What\u2019s THAT?! It\u2019s an ALIEN!!! Inside you! It\u2019s goes deeper
     into your organs! You need to take it out!"
 --- !u!1 &170348355
