@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
     public GameObject canvas;
     public GameObject background;
     public GameObject overlay;
-    public GameObject scene1, scene2, scene3, scene4, scene7, scene8, scene9, alienPopup;
+    public GameObject alienPopup;
     public GameObject form;
     private int state = 0;
     private GameObject activeOverlay;
@@ -20,7 +20,7 @@ public class Controller : MonoBehaviour
     [SerializeField] List<Sprite> _sceneSprites;
     [TextArea(5,5)]
     [SerializeField] List<string> _sceneStrings;
-
+    [SerializeField] GameObject _organs;
     GameObject _nextButton;
     int _stringIndex = 0;
     bool _textRunning = false;
@@ -64,6 +64,10 @@ public class Controller : MonoBehaviour
         {
             _scene.SetActive(true);
             _nextButton.SetActive(true);
+        }
+        if (state == 8)
+        {
+            _organs.SetActive(true);
         }
         if (state == 9) //Alien popup
         {

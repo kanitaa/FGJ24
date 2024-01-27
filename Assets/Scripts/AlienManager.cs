@@ -22,8 +22,6 @@ public class AlienManager : MonoBehaviour
     private List<Joke> jokeList;
 
     int _correctCounter,_incorrectCounter = 0;
-
-    [SerializeField] AnimationClip _fartAnim;
     Animator anim;
 
     private void Start()
