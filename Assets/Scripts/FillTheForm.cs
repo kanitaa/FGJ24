@@ -110,24 +110,24 @@ public class FillTheForm : MonoBehaviour
             characters.RemoveAt(indexChar);
 
         }
-        while (result == input)
+        if(result[0] != result[1] && result.Length>2)
         {
-            result = "";
-            characters = new List<char>(input.ToCharArray());
-            while (characters.Count > 0)
+            while (result == input)
             {
-                int indexChar = Random.Range(0, characters.Count);
-                result += characters[indexChar];
-                characters.RemoveAt(indexChar);
+                result = "";
+                characters = new List<char>(input.ToCharArray());
+                while (characters.Count > 0)
+                {
+                    int indexChar = Random.Range(0, characters.Count);
+                    result += characters[indexChar];
+                    characters.RemoveAt(indexChar);
 
+                }
             }
         }
             _patientNameText.text = result;
             _scrambledName = result;
             _isNameDone = true;
-
-        
-      
     }
     #endregion
 
