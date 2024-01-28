@@ -345,11 +345,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "~Credits~\n\n\nElias Er\xE4valo - Artist, loudest laugher\n\nJanita Korhonen
-    - Programmer, Superhero\n\nAhti Ahde - Programmer\n\nKarri Liikkanen - Story,
-    Vocals, Voice of the Alien\n\nCansu Sindel - Narrative/Game designer Story, Vocals,
-    Voice of Non-Alien\n\nEmil Backlund - Programmer\n\nIva Kojadinovic - Artist\n\nCephas
-    Ofori - Artist\n\nTino Kuortti - Artist\n\nMarija - Sound designer"
+  m_text: "Names are shown in non-alphabetical, but in nearly chronological order
+    of appearance, against the disapproval by the creators. It\u2019s ok. We treated
+    each other with the same love we gave the game and no aliens were harmed in the
+    process.\n\n\n\n\n\n\n\n\n~Credits~\n\n\nElias Er\xE4valo - Artist, loudest laugher\n\nJanita
+    Korhonen - Programmer, Superhero\n\nAhti Ahde - Programmer\n\nKarri Liikkanen
+    - Story, Vocals, Voice of the Alien\n\nCansu Sindel - Narrative/Game designer
+    Story, Vocals, Voice of Non-Alien\n\nEmil Backlund - Programmer\n\nIva Kojadinovic
+    - Artist\n\nCephas Ofori - Artist\n\nTino Kuortti - Artist\n\nMarija - Sound
+    designer\n\n\n\n\n\n\n\nGGJ24\n\n\nAlien inside you."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

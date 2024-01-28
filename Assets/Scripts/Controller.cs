@@ -40,7 +40,7 @@ public class Controller : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource soundSource;
 
-
+    GameObject tempCatman;
     public AudioClip nextButtonClip, catClip;
 
     public AudioClip lobbyClip, catmanClip, likeSurgeonSoloClip, likeSurgeonDuoClip, gameMusicClip;
@@ -120,9 +120,9 @@ public class Controller : MonoBehaviour
 
         if (state == 10)
         {
-            soundSource.PlayOneShot(catClip);
 
             if(!musicSource.isPlaying) musicSource.PlayOneShot(catmanClip);
+
             catman.SetActive(true);
             GameManager.Instance.AlienPopup();
             _organs.SetActive(false);

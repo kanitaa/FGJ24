@@ -11,8 +11,9 @@ public class CatMan : MonoBehaviour
   {
     this.movement = GetComponent<CatManMovement>();
   }
-  
-  void Update()
+   
+    
+    void Update()
   {
         if (isAlienDistracting) return;
 

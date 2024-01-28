@@ -90,7 +90,7 @@ public class AlienManager : MonoBehaviour
         _ctrl.soundSource.PlayOneShot(_fartClips[random]);
         Debug.Log("Incorrect!");
         anim.SetTrigger("fart");
-        //Lose();
+
         _incorrectCounter++;
         if (_incorrectCounter == 5) Lose();
         else GenerateJoke();
@@ -109,8 +109,8 @@ public class AlienManager : MonoBehaviour
     void Lose()
     {
         _ctrl.soundSource.PlayOneShot(_loseClip);
-        Debug.Log("Lose");
-        transform.parent.gameObject.SetActive(false);
+       // Debug.Log("Lose");
+       // transform.parent.gameObject.SetActive(false);
       
     }
 }

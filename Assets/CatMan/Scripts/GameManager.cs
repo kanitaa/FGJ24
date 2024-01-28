@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
   {
     this.catman.gameObject.SetActive(true);
     Instance = this;
-   
   }
     public void AlienPopup()
     {
