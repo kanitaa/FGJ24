@@ -64,7 +64,8 @@ public class Controller : MonoBehaviour
         }
         if (state == 6) //Title screen
         {
-            activeOverlay = Instantiate(_titleScene, overlay.transform.position, Quaternion.identity, overlay.transform);
+            activeOverlay = Instantiate(_titleScene, overlay.transform);
+            activeOverlay.transform.SetAsFirstSibling();
             _nextButton.SetActive(true);
         }
         if (state == 8)
