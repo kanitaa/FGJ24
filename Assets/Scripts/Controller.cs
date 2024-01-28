@@ -14,7 +14,8 @@ public class Controller : MonoBehaviour
     public GameObject kidney;
     public GameObject robot;
     public GameObject form;
-    private int state = 0;
+    public GameObject catman;
+    private int state = 6;
     private GameObject activeOverlay;
 
 
@@ -105,6 +106,7 @@ public class Controller : MonoBehaviour
         if (state == 17)
         {
             Destroy(activeOverlay);
+            catman.SetActive(true);
         }
         
         
