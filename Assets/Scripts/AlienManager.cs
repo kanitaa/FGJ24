@@ -32,10 +32,12 @@ public class AlienManager : MonoBehaviour
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        using (StreamReader r = new StreamReader("Assets/dad-jokes.json"))
+        TextAsset jsonAsset = Resources.Load<TextAsset>("dad-jokes");
+        if (jsonAsset != null)
         {
-            string json = r.ReadToEnd();
-            jokeList = JsonConvert.DeserializeObject<List<Joke>>(json);
+            // If the asset is found, deserialize its text content
+            jokeList = JsonConvert.DeserializeObject<List<Joke>>(jsonAsset.text);
+            GenerateJoke();
         }
         GenerateJoke();
     }

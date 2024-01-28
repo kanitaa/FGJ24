@@ -50,6 +50,7 @@ public class Controller : MonoBehaviour
         _nextButton.GetComponent<Button>().onClick.AddListener(Next);
         catman.SetActive(false);
         musicSource.PlayOneShot(gameMusicClip);
+        alienPopup.SetActive(false);
         Next();   
     }
    
@@ -66,14 +67,13 @@ public class Controller : MonoBehaviour
             return;
         }
 
-        if (!isGameOver)
-        {
-            if (state < 10) state++;
-            else state--;
-        }
+        
+        if (state <= 10) state++;
+        else state--;
+        
        
         
-        if (state < 9)
+        if (state <= 9)
         {
             _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
             _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state-1];
@@ -84,7 +84,7 @@ public class Controller : MonoBehaviour
             musicSource.Stop();
             musicSource.PlayOneShot(lobbyClip);
         }
-        // Debug.Log(state);
+        Debug.Log(state);
         if (state == 5) //Form
         {
             form.SetActive(true);
@@ -109,16 +109,16 @@ public class Controller : MonoBehaviour
             
             _scene.SetActive(true);
         }
-        if (state == 8)
+        if (state == 9)
         {
             _organs.SetActive(true);
         }
-        if (state == 9) //Alien popup
+        if (state == 10) //Alien popup
         {
             TriggerAlien();
         }
 
-        if (state == 10)
+        if (state == 11)
         {
 
             if(!musicSource.isPlaying) musicSource.PlayOneShot(catmanClip);
@@ -127,24 +127,10 @@ public class Controller : MonoBehaviour
             GameManager.Instance.AlienPopup();
             _organs.SetActive(false);
             alienPopup.SetActive(false);
-            _nextButton.SetActive(false);
+          
             catman.GetComponentInChildren<CatMan>().isAlienDistracting = false;
         }
-       
-
-        //if (state == 10)
-        //{
-        //    activeOverlay = Instantiate(kidney, overlay.transform.position, Quaternion.identity, overlay.transform);
-        //    activeOverlay.transform.SetParent(overlay.transform);
-        //    activeOverlay.transform.localScale += new Vector3(1, 1, 1);
-        //}
-        //if (state == 11)
-        //{
-        //    Destroy(activeOverlay);
-        //    activeOverlay = Instantiate(robot, overlay.transform.position, Quaternion.identity, overlay.transform);
-        //    activeOverlay.transform.SetParent(overlay.transform);
-        //    activeOverlay.transform.localScale += new Vector3(1, 1, 1);
-        //}
+      
 
 
     }
@@ -192,7 +178,7 @@ public class Controller : MonoBehaviour
         musicSource.Stop();
         _stringIndex = 0;
         isGameOver = true;
-        _scene.transform.GetChild(0).gameObject.SetActive(true);
+        _scene.transform.GetChild(1).gameObject.SetActive(true);
         _nextButton.SetActive(true);
         _nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         _nextButton.GetComponent<Button>().onClick.AddListener(Ending);
@@ -214,7 +200,8 @@ public class Controller : MonoBehaviour
     public void TriggerAlien()
     {
         catman.GetComponentInChildren<CatMan>().isAlienDistracting = true;
-        _scene.transform.GetChild(0).gameObject.SetActive(false);
+        _scene.transform.GetChild(1).gameObject.SetActive(false);
+        _nextButton.SetActive(false);
         alienPopup.SetActive(true);
         _nextButton.SetActive(false);
         alienPopup.GetComponentInChildren<AlienManager>().isDistraction = false;
@@ -223,16 +210,32 @@ public class Controller : MonoBehaviour
     IEnumerator FancyText(int index)
     {
         _textRunning = true;
-        if(!isGameOver) _scene.GetComponentInChildren<TextMeshProUGUI>().text += _sceneStrings[index].ElementAt(_stringIndex);
-        else _scene.GetComponentInChildren<TextMeshProUGUI>().text += _gameOverStrings[index].ElementAt(_stringIndex);
-        if (_stringIndex < _sceneStrings[index].Length - 1)
-            _stringIndex++;
+        if(!isGameOver)
+        {
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text += _sceneStrings[index].ElementAt(_stringIndex);
+            if (_stringIndex < _sceneStrings[index].Length - 1)
+                _stringIndex++;
+            else
+            {
+                _stringIndex = 0;
+                _textRunning = false;
+                StopAllCoroutines();
+            }
+        }
+
         else
         {
-            _stringIndex = 0;
-            _textRunning = false;
-            StopAllCoroutines();
-        }
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text += _gameOverStrings[index].ElementAt(_stringIndex);
+            if (_stringIndex < _gameOverStrings[index].Length - 1)
+                _stringIndex++;
+            else
+            {
+                _stringIndex = 0;
+                _textRunning = false;
+                StopAllCoroutines();
+            }
+        } 
+       
         yield return new WaitForSeconds(0.03f);
         StartCoroutine(FancyText(index));
     }

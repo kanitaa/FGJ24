@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour
   private int catsCaught;
     public AudioClip kittenClip;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
   {
     this.catman.gameObject.SetActive(true);
-    Instance = this;
+  
   }
     public void AlienPopup()
     {
