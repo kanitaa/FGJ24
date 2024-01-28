@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
     public GameObject robot;
     public GameObject form;
     public GameObject catman;
-    private int state = 1;
+    private int state = 0;
     private GameObject activeOverlay;
 
 
