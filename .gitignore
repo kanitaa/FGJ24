@@ -47,6 +47,9 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+#Elias written unity meta push removal
+*.meta
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
