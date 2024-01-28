@@ -55,6 +55,8 @@ public class FillTheForm : MonoBehaviour
 
 
     bool _isNameDone, _isNumberDone, _isSymptomDone, _isDrawingDone=false;
+
+    [SerializeField] AudioClip urgentClip;
     private void Start()
     {
         _patientName.onClick.AddListener(EnableNameGame);
@@ -265,6 +267,8 @@ public class FillTheForm : MonoBehaviour
        
         else
         {
+            _ctrl.musicSource.Stop();
+            _ctrl.soundSource.PlayOneShot(urgentClip);
             Debug.Log("Submit form");
             _drawingsHolder.SetActive(false);
             _submitPanel.SetActive(true);

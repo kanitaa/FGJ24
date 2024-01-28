@@ -25,7 +25,10 @@ public class AlienManager : MonoBehaviour
 
     int _correctCounter,_incorrectCounter = 0;
     Animator anim;
-
+    [SerializeField] AudioClip _laughClip, _loseClip;
+    [SerializeField] AudioClip[]  _fartClips;
+    bool firstQuestion = false;
+   
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -71,9 +74,9 @@ public class AlienManager : MonoBehaviour
     void CorrectAnswer()
     {
         Debug.Log("Correct!");
-        
-        Win();
-        return;
+        if (!firstQuestion) _ctrl.musicSource.Stop();
+        firstQuestion = true;
+        _ctrl.soundSource.PlayOneShot(_laughClip);
         _correctCounter++;
        
         if (_correctCounter == 5) Win();
@@ -83,6 +86,8 @@ public class AlienManager : MonoBehaviour
     }
     void WrongAnswer()
     {
+        int random = Random.Range(0, 2);
+        _ctrl.soundSource.PlayOneShot(_fartClips[random]);
         Debug.Log("Incorrect!");
         anim.SetTrigger("fart");
         //Lose();
@@ -103,12 +108,9 @@ public class AlienManager : MonoBehaviour
 
     void Lose()
     {
-       
+        _ctrl.soundSource.PlayOneShot(_loseClip);
         Debug.Log("Lose");
         transform.parent.gameObject.SetActive(false);
-        if (isDistraction == false)
-        {
-            _ctrl.Next();
-        }
+      
     }
 }

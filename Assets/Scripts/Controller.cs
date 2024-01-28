@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
     public GameObject robot;
     public GameObject form;
     public GameObject catman;
-    private int state = 5;
+    private int state = 1;
     private GameObject activeOverlay;
 
 
@@ -35,17 +35,28 @@ public class Controller : MonoBehaviour
 
     public bool isGameOver = false;
     int endState = 0;
-    // Start is called before the first frame update
+
+
+    public AudioSource musicSource;
+    public AudioSource soundSource;
+
+
+    public AudioClip nextButtonClip, catClip;
+
+    public AudioClip lobbyClip, catmanClip, likeSurgeonSoloClip, likeSurgeonDuoClip, gameMusicClip;
     void Start()
     {
+        musicSource.loop = true;
         _nextButton.GetComponent<Button>().onClick.AddListener(Next);
         catman.SetActive(false);
+        musicSource.PlayOneShot(gameMusicClip);
         Next();   
     }
    
 
     public void Next()
     {
+        soundSource.PlayOneShot(nextButtonClip);
         if (_textRunning)
         {
             StopAllCoroutines();
@@ -68,8 +79,12 @@ public class Controller : MonoBehaviour
             _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state-1];
             StartCoroutine(FancyText(state-1));
         }
-       
-       // Debug.Log(state);
+        if (state == 4)
+        {
+            musicSource.Stop();
+            musicSource.PlayOneShot(lobbyClip);
+        }
+        // Debug.Log(state);
         if (state == 5) //Form
         {
             form.SetActive(true);
@@ -80,13 +95,18 @@ public class Controller : MonoBehaviour
         }
         if (state == 6) //Title screen
         {
+            musicSource.PlayOneShot(likeSurgeonSoloClip);
             activeOverlay = Instantiate(_titleScene, overlay.transform);
             activeOverlay.transform.SetAsFirstSibling();
             _nextButton.SetActive(true);
         }
         if(state == 7)
         {
+            musicSource.Stop();
+            musicSource.PlayOneShot(gameMusicClip);
             Destroy(activeOverlay);
+           
+            
             _scene.SetActive(true);
         }
         if (state == 8)
@@ -100,7 +120,9 @@ public class Controller : MonoBehaviour
 
         if (state == 10)
         {
-          
+            soundSource.PlayOneShot(catClip);
+
+            if(!musicSource.isPlaying) musicSource.PlayOneShot(catmanClip);
             catman.SetActive(true);
             GameManager.Instance.AlienPopup();
             _organs.SetActive(false);
@@ -128,6 +150,7 @@ public class Controller : MonoBehaviour
     }
     public void Ending()
     {
+        if (!musicSource.isPlaying) musicSource.PlayOneShot(likeSurgeonDuoClip);
         endState++;
         if (_textRunning)
         {
@@ -164,6 +187,8 @@ public class Controller : MonoBehaviour
 
     public void GameOver()
     {
+        musicSource.Stop();
+
         isGameOver = true;
         _scene.transform.GetChild(0).gameObject.SetActive(true);
         _nextButton.SetActive(true);

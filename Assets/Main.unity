@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 83490908}
   - component: {fileID: 83490909}
+  - component: {fileID: 83490911}
+  - component: {fileID: 83490910}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -149,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 83490906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0944066, y: 3.4914713, z: 62.290905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -219,10 +221,10 @@ MonoBehaviour:
   _nextButton: {fileID: 962039057}
   _gameOverSprites:
   - {fileID: 21300000, guid: 3ca22beb26eed634db43ef4ccb0be259, type: 3}
-  - {fileID: 21300000, guid: 3ca22beb26eed634db43ef4ccb0be259, type: 3}
-  - {fileID: 21300000, guid: 3ca22beb26eed634db43ef4ccb0be259, type: 3}
-  - {fileID: 21300000, guid: 3ca22beb26eed634db43ef4ccb0be259, type: 3}
-  - {fileID: 21300000, guid: 3ca22beb26eed634db43ef4ccb0be259, type: 3}
+  - {fileID: 21300000, guid: 7c92839d174de784ba5418f9ee1d031d, type: 3}
+  - {fileID: 21300000, guid: 7c92839d174de784ba5418f9ee1d031d, type: 3}
+  - {fileID: 21300000, guid: 7c92839d174de784ba5418f9ee1d031d, type: 3}
+  - {fileID: 21300000, guid: 7c92839d174de784ba5418f9ee1d031d, type: 3}
   - {fileID: 21300000, guid: 0c9ec69debfc3ca4eb0bd4661ba6e84a, type: 3}
   _gameOverStrings:
   - "Congrats! You\u2019ve succeeded. Alien is out of your body. And you know what?
@@ -238,6 +240,207 @@ MonoBehaviour:
   - "Alien laughs so hard that it accidentally cracks open your head, and you die.
     In the end, the joke\u2019s on you."
   isGameOver: 0
+  musicSource: {fileID: 83490911}
+  soundSource: {fileID: 83490910}
+  nextButtonClip: {fileID: 8300000, guid: 6a88ed9b97e02754385ec5b02c60955c, type: 3}
+  catClip: {fileID: 8300000, guid: b57056b2e40087d4ca996431e99ed773, type: 3}
+  lobbyClip: {fileID: 8300000, guid: b573ac1d4862da1488017c963c7005c6, type: 3}
+  catmanClip: {fileID: 8300000, guid: 83d61c72d69e4844381b6064b9eb409e, type: 3}
+  likeSurgeonSoloClip: {fileID: 8300000, guid: eaf2db0655947584990abb1a6202d0de, type: 3}
+  likeSurgeonDuoClip: {fileID: 8300000, guid: f4633cc0888e70544be8d4115f85abba, type: 3}
+  gameMusicClip: {fileID: 8300000, guid: 708efcd55d3701e4abd81a52e9de8ce8, type: 3}
+--- !u!82 &83490910
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83490906}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &83490911
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83490906}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.897
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &134324499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2769,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 83490909}
     - target: {fileID: 457115813599371743, guid: c22e7e754e1c4cb4c8b93d1f727e22b3, type: 3}
+      propertyPath: urgentClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a5d4af02484c8e458ed8a7fc8bf892b, type: 3}
+    - target: {fileID: 457115813599371743, guid: c22e7e754e1c4cb4c8b93d1f727e22b3, type: 3}
       propertyPath: _drawingsHolder
       value: 
       objectReference: {fileID: 761379655}
@@ -4699,8 +4906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You better come up with the best joke for that puncline or you will be
-    the next one to be punched!
+  m_text: Here is a dad joke from Alien. Which joke belongs to this punch line?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5080,7 +5286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 599.2224, y: 71.91251}
+  m_AnchoredPosition: {x: 599.2224, y: 23.000023}
   m_SizeDelta: {x: 358.654, y: 114.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3942866211283728238
@@ -5375,7 +5581,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alien thinks it just came up with a superior punchline!
+  m_text: 'Alien inside you!
+
+    Cure yourself by laughing!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5541,7 +5749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 368.2801, y: 71.91251}
+  m_AnchoredPosition: {x: 368.2801, y: 23}
   m_SizeDelta: {x: 366.076, y: 114.635}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6869998802702248842
@@ -5833,7 +6041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 483.68018, y: 18.410461}
+  m_AnchoredPosition: {x: 483.68018, y: 109}
   m_SizeDelta: {x: 866.41, y: 73.284}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &8833936948968891013
@@ -5855,6 +6063,12 @@ MonoBehaviour:
   _aButton: {fileID: 4377868264467665500}
   _bButton: {fileID: 3484810752068680943}
   isDistraction: 0
+  _laughClip: {fileID: 8300000, guid: dc5765c3a35a108408245c85e6880b64, type: 3}
+  _loseClip: {fileID: 8300000, guid: b58bfecd56e357c44aed8b06ad56f149, type: 3}
+  _fartClips:
+  - {fileID: 8300000, guid: 92e9b217c5b00f647835afc2b3ddd59e, type: 3}
+  - {fileID: 8300000, guid: 45ecc89f4601fea4d88ef1a8f2b5ad85, type: 3}
+  - {fileID: 8300000, guid: 585d4101414a8954386ffb44286a0246, type: 3}
 --- !u!224 &9061912975365637533
 RectTransform:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ MonoBehaviour:
   victoryScreen: {fileID: 4807061698788895734}
   success: 0
   _ctrl: {fileID: 0}
+  kittenClip: {fileID: 8300000, guid: ed400cf2e7b5d074da6bcf4e0b70a01d, type: 3}
 --- !u!1 &926293531566021409
 GameObject:
   m_ObjectHideFlags: 0

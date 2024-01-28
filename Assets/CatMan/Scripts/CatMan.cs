@@ -6,6 +6,7 @@ public class CatMan : MonoBehaviour
   public CatManMovement movement { get; private set; }
 
     public bool isAlienDistracting = false;
+
   private void Awake()
   {
     this.movement = GetComponent<CatManMovement>();
@@ -32,6 +33,7 @@ public class CatMan : MonoBehaviour
     {
       if (collision.gameObject.layer == LayerMask.NameToLayer("Kitten"))
       {
+        
         GameManager.Instance.KittenCaught();
         Destroy(collision.gameObject);
       }

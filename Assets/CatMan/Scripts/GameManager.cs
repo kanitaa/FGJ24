@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
   public bool success;
   public Controller _ctrl;
   private int catsCaught;
+    public AudioClip kittenClip;
 
-
-  private void Start()
+    private void Start()
   {
     this.catman.gameObject.SetActive(true);
     Instance = this;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
   public void KittenCaught()
   {
+        _ctrl.soundSource.PlayOneShot(kittenClip);
     catsCaught += 1;
     if (catsCaught == 4)
     {
