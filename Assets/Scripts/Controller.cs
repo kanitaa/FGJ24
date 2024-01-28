@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
     public GameObject canvas;
     public GameObject background;
     public GameObject overlay;
-    public GameObject alienPopup;
+    public GameObject alienPopup, alienKill;
     public GameObject kidney;
     public GameObject robot;
     public GameObject form;
@@ -151,7 +151,7 @@ public class Controller : MonoBehaviour
     public void Ending()
     {
         if (!musicSource.isPlaying) musicSource.PlayOneShot(likeSurgeonDuoClip);
-        endState++;
+        
         if (_textRunning)
         {
             StopAllCoroutines();
@@ -160,7 +160,7 @@ public class Controller : MonoBehaviour
             _scene.GetComponentInChildren<TextMeshProUGUI>().text = _gameOverStrings[endState - 1];
             return;
         }
-
+        endState++;
 
         Debug.Log(endState);
         
@@ -170,11 +170,13 @@ public class Controller : MonoBehaviour
             _scene.GetComponentInChildren<Image>().sprite = _gameOverSprites[endState - 1];
             StartCoroutine(FancyText(endState - 1));
         }
+        if(endState==6) alienKill.SetActive(true);
         if (endState == 7)
         {
             activeOverlay = Instantiate(_endScene, overlay.transform);
             activeOverlay.transform.SetAsFirstSibling();
             _nextButton.SetActive(false);
+           
             Invoke("Credits", 4);
         }
        
@@ -188,7 +190,7 @@ public class Controller : MonoBehaviour
     public void GameOver()
     {
         musicSource.Stop();
-
+        _stringIndex = 0;
         isGameOver = true;
         _scene.transform.GetChild(0).gameObject.SetActive(true);
         _nextButton.SetActive(true);
