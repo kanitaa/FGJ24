@@ -10,7 +10,9 @@ public class Controller : MonoBehaviour
     public GameObject canvas;
     public GameObject background;
     public GameObject overlay;
-    public GameObject scene1, scene2, scene3, scene4, scene7, scene8, scene9, alienPopup;
+    public GameObject alienPopup;
+    public GameObject kidney;
+    public GameObject robot;
     public GameObject form;
     private int state = 0;
     private GameObject activeOverlay;
@@ -20,7 +22,7 @@ public class Controller : MonoBehaviour
     [SerializeField] List<Sprite> _sceneSprites;
     [TextArea(5,5)]
     [SerializeField] List<string> _sceneStrings;
-
+    [SerializeField] GameObject _organs;
     GameObject _nextButton;
     int _stringIndex = 0;
     bool _textRunning = false;
@@ -42,10 +44,17 @@ public class Controller : MonoBehaviour
             _scene.GetComponentInChildren<TextMeshProUGUI>().text = _sceneStrings[state-1];
             return;
         }
-          
-        _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        state++;
+        Debug.Log(state);
 
-        if (state == 4) //Form
+
+        if (state < 9)
+        {
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state-1];
+            StartCoroutine(FancyText(state-1));
+        }
+        if (state == 5) //Form
         {
             form.SetActive(true);
             _scene.SetActive(false);
@@ -53,22 +62,51 @@ public class Controller : MonoBehaviour
             _textRunning = false;
             _stringIndex = 0;
         }
-        if (state == 5) //Title screen
+        if (state == 6) //Title screen
         {
             _scene.SetActive(true);
             _nextButton.SetActive(true);
         }
-        if (state == 8) //Alien popup
+        if (state == 8)
         {
-            _scene.transform.GetChild(0).gameObject.SetActive(false);
-            alienPopup.SetActive(true);
-            _nextButton.SetActive(false);
+            _organs.SetActive(true);
+        }
+        if (state == 9) //Alien popup
+        {
+            TriggerAlien();
 
             return;
         }
-        _scene.GetComponentInChildren<Image>().sprite = _sceneSprites[state];
-        StartCoroutine(FancyText(state));
-        state++;
+        if (state == 10)
+        {
+            activeOverlay = Instantiate(kidney, overlay.transform.position, Quaternion.identity, overlay.transform);
+            activeOverlay.transform.SetParent(overlay.transform);
+            activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+        }
+        if (state == 11)
+        {
+            Destroy(activeOverlay);
+            activeOverlay = Instantiate(robot, overlay.transform.position, Quaternion.identity, overlay.transform);
+            activeOverlay.transform.SetParent(overlay.transform);
+            activeOverlay.transform.localScale += new Vector3(1, 1, 1);
+        }
+        if (state == 12)
+        {
+            TriggerAlien();
+        }
+        if (state == 14)
+        {
+            TriggerAlien();
+        }
+        if (state == 16)
+        {
+            TriggerAlien();
+        }
+        if (state == 17)
+        {
+            Destroy(activeOverlay);
+        }
+        
         
 
         //if (this.state == 0) {
@@ -163,6 +201,23 @@ public class Controller : MonoBehaviour
         //}
 
     }
+
+    public void AlienDistraction()
+    {
+        _scene.transform.GetChild(0).gameObject.SetActive(false);
+        alienPopup.SetActive(true);
+        _nextButton.SetActive(false);
+        alienPopup.GetComponentInChildren<AlienManager>().isDistraction = true;
+    }
+
+    public void TriggerAlien()
+    {
+        _scene.transform.GetChild(0).gameObject.SetActive(false);
+        alienPopup.SetActive(true);
+        _nextButton.SetActive(false);
+        alienPopup.GetComponentInChildren<AlienManager>().isDistraction = false;
+    }
+
     IEnumerator FancyText(int index)
     {
         _textRunning = true;

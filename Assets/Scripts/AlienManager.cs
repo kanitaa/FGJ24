@@ -7,12 +7,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JokeList
-{
-    public List<string> jokes;
-    public List<string> punchlines;
-}
-
 public class Joke
 {
     public string joke;
@@ -21,14 +15,14 @@ public class Joke
 
 public class AlienManager : MonoBehaviour
 {
+    [SerializeField] Controller _ctrl;
     [SerializeField] TextMeshProUGUI _alienText, _answerA, _answerB;
     [SerializeField] Button _aButton, _bButton;
+    public bool isDistraction = false;
 
     private List<Joke> jokeList;
 
     int _correctCounter,_incorrectCounter = 0;
-
-    [SerializeField] AnimationClip _fartAnim;
     Animator anim;
 
     private void Start()
@@ -77,27 +71,39 @@ public class AlienManager : MonoBehaviour
     void CorrectAnswer()
     {
         Debug.Log("Correct!");
-        _correctCounter++;
-        if (_correctCounter == 7) Win();
-        GenerateJoke();
+        Win();
+        //_correctCounter++;
+        //if (_correctCounter == 7) Win();
+        // GenerateJoke();
     }
     void WrongAnswer()
     {
         Debug.Log("Incorrect!");
         anim.SetTrigger("fart");
-        _incorrectCounter++;
-        if (_incorrectCounter == 5) Lose();
-        GenerateJoke();
+        Lose();
+        //_incorrectCounter++;
+        //if (_correctCounter == 5) Lose();
+        // GenerateJoke();
     }
 
     void Win()
     {
         Debug.Log("Win");
+        transform.parent.gameObject.SetActive(false);
+        if (isDistraction == false)
+        {
+            _ctrl.Next();
+        }
     }
 
     void Lose()
     {
        
         Debug.Log("Lose");
+        transform.parent.gameObject.SetActive(false);
+        if (isDistraction == false)
+        {
+            _ctrl.Next();
+        }
     }
 }
