@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,12 +67,13 @@ public class AlienManager : MonoBehaviour
             _bButton.onClick.AddListener(CorrectAnswer);
         }
     }
-
+   
     void CorrectAnswer()
     {
         Debug.Log("Correct!");
         
-       // Win();
+        Win();
+        return;
         _correctCounter++;
        
         if (_correctCounter == 5) Win();
@@ -93,14 +95,10 @@ public class AlienManager : MonoBehaviour
     {
         Debug.Log("Win");
         transform.parent.gameObject.SetActive(false);
-        if (isDistraction == false)
-        {
-            _ctrl.SetState(10);
-            _ctrl.isGameOver = true;
-            _ctrl.Next();
-           
-            _ctrl.catman.SetActive(false);
-        }
+        _ctrl.GameOver();
+       
+        _ctrl.catman.SetActive(false);
+        
     }
 
     void Lose()

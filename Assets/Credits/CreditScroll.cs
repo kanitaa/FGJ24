@@ -6,6 +6,6 @@ public class CreditScroll : MonoBehaviour
   public float speed = 1;
   void FixedUpdate()
   {
-    textTransform.position = textTransform.position + Vector3.up * speed;
+    textTransform.position = textTransform.position + Vector3.up * speed * Time.deltaTime;
   }
 }

@@ -15,11 +15,11 @@ public class Controller : MonoBehaviour
     public GameObject robot;
     public GameObject form;
     public GameObject catman;
-    private int state = 1;
+    private int state = 5;
     private GameObject activeOverlay;
 
 
-    [SerializeField] GameObject _scene, _titleScene;
+    [SerializeField] GameObject _scene, _titleScene, _endScene;
     [SerializeField] List<Sprite> _sceneSprites;
     [TextArea(5,5)]
     [SerializeField] List<string> _sceneStrings;
@@ -34,18 +34,15 @@ public class Controller : MonoBehaviour
     [SerializeField] List<string> _gameOverStrings;
 
     public bool isGameOver = false;
-
-    public void SetState(int state)
-    {
-        this.state = state;
-    }
+    int endState = 0;
     // Start is called before the first frame update
     void Start()
     {
+        _nextButton.GetComponent<Button>().onClick.AddListener(Next);
         catman.SetActive(false);
         Next();   
     }
-
+   
 
     public void Next()
     {
@@ -63,12 +60,8 @@ public class Controller : MonoBehaviour
             if (state < 10) state++;
             else state--;
         }
-        else if (isGameOver) state++;
+       
         
-
-
-
-
         if (state < 9)
         {
             _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -76,7 +69,7 @@ public class Controller : MonoBehaviour
             StartCoroutine(FancyText(state-1));
         }
        
-        Debug.Log(state);
+       // Debug.Log(state);
         if (state == 5) //Form
         {
             form.SetActive(true);
@@ -107,21 +100,15 @@ public class Controller : MonoBehaviour
 
         if (state == 10)
         {
-
+          
             catman.SetActive(true);
+            GameManager.Instance.AlienPopup();
             _organs.SetActive(false);
             alienPopup.SetActive(false);
             _nextButton.SetActive(false);
             catman.GetComponentInChildren<CatMan>().isAlienDistracting = false;
-            StartCoroutine(Alien());
         }
-        if (state > 10 && state < 17)
-        {
-            catman.SetActive(false);
-            _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            _scene.GetComponentInChildren<Image>().sprite = _gameOverSprites[state - 1];
-            StartCoroutine(FancyText(state - 1));
-        }
+       
 
         //if (state == 10)
         //{
@@ -139,13 +126,54 @@ public class Controller : MonoBehaviour
 
 
     }
-
-    IEnumerator Alien()
+    public void Ending()
     {
-        yield return new WaitForSeconds(6);
-        Next();
+        endState++;
+        if (_textRunning)
+        {
+            StopAllCoroutines();
+            _textRunning = false;
+            _stringIndex = 0;
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text = _gameOverStrings[endState - 1];
+            return;
+        }
 
+
+        Debug.Log(endState);
+        
+        if (endState < 7)
+        {
+            _scene.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            _scene.GetComponentInChildren<Image>().sprite = _gameOverSprites[endState - 1];
+            StartCoroutine(FancyText(endState - 1));
+        }
+        if (endState == 7)
+        {
+            activeOverlay = Instantiate(_endScene, overlay.transform);
+            activeOverlay.transform.SetAsFirstSibling();
+            _nextButton.SetActive(false);
+            Invoke("Credits", 4);
+        }
+       
     }
+
+    void Credits()
+    {
+        activeOverlay.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        _scene.transform.GetChild(0).gameObject.SetActive(true);
+        _nextButton.SetActive(true);
+        _nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        _nextButton.GetComponent<Button>().onClick.AddListener(Ending);
+        _organs.SetActive(false);
+        alienPopup.SetActive(false);
+        Ending();
+    }
+
 
     public void AlienDistraction()
     {

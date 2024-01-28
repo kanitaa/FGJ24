@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,14 +15,24 @@ public class GameManager : MonoBehaviour
   {
     this.catman.gameObject.SetActive(true);
     Instance = this;
+   
   }
-
+    public void AlienPopup()
+    {
+        StartCoroutine(Alien());
+    }
+    IEnumerator Alien()
+    {
+        yield return new WaitForSeconds(6);
+        _ctrl.Next();
+       
+    }
   private void GameOver()
   {
-    this.catman.gameObject.SetActive(false);
-    _ctrl.SetState(10);
-    _ctrl.Next();
-    _ctrl.isGameOver = true;
+        StopAllCoroutines();
+        _ctrl.GameOver();
+        transform.parent.gameObject.SetActive(false);
+        
         
     }
 
