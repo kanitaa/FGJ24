@@ -4,7 +4,8 @@ using UnityEngine;
 public class CatMan : MonoBehaviour
 {
   public CatManMovement movement { get; private set; }
-  
+
+    public bool isAlienDistracting = false;
   private void Awake()
   {
     this.movement = GetComponent<CatManMovement>();
@@ -12,6 +13,8 @@ public class CatMan : MonoBehaviour
   
   void Update()
   {
+        if (isAlienDistracting) return;
+
     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
       this.movement.SetDirection(Vector2.up);
     }

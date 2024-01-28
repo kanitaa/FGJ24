@@ -19,15 +19,18 @@ public class GameManager : MonoBehaviour
   private void GameOver()
   {
     this.catman.gameObject.SetActive(false);
+    _ctrl.SetState(10);
     _ctrl.Next();
-  }
+    _ctrl.isGameOver = true;
+        
+    }
 
   public void KittenCaught()
   {
     catsCaught += 1;
     if (catsCaught == 4)
     {
-      victoryScreen.position = new Vector3(0,0,-2);
+            GameOver();
     }
     
   }

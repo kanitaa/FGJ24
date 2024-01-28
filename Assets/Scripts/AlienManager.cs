@@ -41,7 +41,6 @@ public class AlienManager : MonoBehaviour
         _aButton.onClick.RemoveAllListeners();
         _bButton.onClick.RemoveAllListeners();
 
-        Debug.Log(jokeList.Count);
         int correct = Random.Range(0, jokeList.Count);
         int incorrect = Random.Range(0, jokeList.Count);
 
@@ -71,19 +70,23 @@ public class AlienManager : MonoBehaviour
     void CorrectAnswer()
     {
         Debug.Log("Correct!");
-        Win();
-        //_correctCounter++;
-        //if (_correctCounter == 7) Win();
-        // GenerateJoke();
+        
+       // Win();
+        _correctCounter++;
+       
+        if (_correctCounter == 5) Win();
+        else _ctrl.Next();
+       GenerateJoke();
+       transform.parent.gameObject.SetActive(false);
     }
     void WrongAnswer()
     {
         Debug.Log("Incorrect!");
         anim.SetTrigger("fart");
-        Lose();
-        //_incorrectCounter++;
-        //if (_correctCounter == 5) Lose();
-        // GenerateJoke();
+        //Lose();
+        _incorrectCounter++;
+        if (_incorrectCounter == 5) Lose();
+        else GenerateJoke();
     }
 
     void Win()
@@ -92,7 +95,11 @@ public class AlienManager : MonoBehaviour
         transform.parent.gameObject.SetActive(false);
         if (isDistraction == false)
         {
+            _ctrl.SetState(10);
+            _ctrl.isGameOver = true;
             _ctrl.Next();
+           
+            _ctrl.catman.SetActive(false);
         }
     }
 
