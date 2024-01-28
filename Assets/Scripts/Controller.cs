@@ -15,22 +15,21 @@ public class Controller : MonoBehaviour
     public GameObject robot;
     public GameObject form;
     public GameObject catman;
-    private int state = 6;
+    private int state = 0;
     private GameObject activeOverlay;
 
 
-    [SerializeField] GameObject _scene;
+    [SerializeField] GameObject _scene, _titleScene;
     [SerializeField] List<Sprite> _sceneSprites;
     [TextArea(5,5)]
     [SerializeField] List<string> _sceneStrings;
     [SerializeField] GameObject _organs;
-    GameObject _nextButton;
+    [SerializeField] GameObject _nextButton;
     int _stringIndex = 0;
     bool _textRunning = false;
     // Start is called before the first frame update
     void Start()
     {
-        _nextButton = overlay.transform.GetChild(0).gameObject;
         Next();   
     }
 
@@ -65,11 +64,13 @@ public class Controller : MonoBehaviour
         }
         if (state == 6) //Title screen
         {
-            _scene.SetActive(true);
+            activeOverlay = Instantiate(_titleScene, overlay.transform.position, Quaternion.identity, overlay.transform);
             _nextButton.SetActive(true);
         }
         if (state == 8)
         {
+            Destroy(activeOverlay);
+            _scene.SetActive(true);
             _organs.SetActive(true);
         }
         if (state == 9) //Alien popup
@@ -210,6 +211,7 @@ public class Controller : MonoBehaviour
         alienPopup.SetActive(true);
         _nextButton.SetActive(false);
         alienPopup.GetComponentInChildren<AlienManager>().isDistraction = true;
+
     }
 
     public void TriggerAlien()
