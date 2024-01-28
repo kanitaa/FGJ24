@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
   public CatMan catman;
   public Transform victoryScreen;
   public bool success;
+  public Controller _ctrl;
   private int catsCaught;
 
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
   private void GameOver()
   {
     this.catman.gameObject.SetActive(false);
+    _ctrl.Next();
   }
 
   public void KittenCaught()
